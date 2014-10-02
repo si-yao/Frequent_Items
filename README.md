@@ -10,45 +10,45 @@ You can use it as a library which is easy to program with.
 To run the program, please execute the jar file: A-Priori.jar. The jar file needs at least 2 arguments, input file path and output file path. Another option is 4 arguments, input file path, output file path, delimiter and threshold. 
 
 Please notice, the program only accepts these two options, other combination of arguments will cause failure. The following states the detail of those arguments.
-*input file path: The path of input file.
-*output file path: The path of output file. Create the file if not exists.
-*delimiter: This is optional, default value is comma (“,”). If you are using other delimiter, please specify.
-*threshold: This is optional, default value is 0.7 based on the description of problem1. But you can set any value between 0 to 1. (0.7 means at least 70% occurrence to be considered as frequent group.)
+*	input file path: The path of input file.
+*	output file path: The path of output file. Create the file if not exists.
+*	delimiter: This is optional, default value is comma (“,”). If you are using other delimiter, please specify.
+*	threshold: This is optional, default value is 0.7 based on the description of problem1. But you can set any value between 0 to 1. (0.7 means at least 70% occurrence to be considered as frequent group.)
 
-Example:
-(Input file is in.csv, output file is out.txt) 
-java –jar ./A-Priori.jar ./in.csv ./out.txt
+Example:<br />
+(Input file is in.csv, output file is out.txt) <br />
+java –jar ./A-Priori.jar ./in.csv ./out.txt<br />
 
-(Besides input/output files, this line specifies delimiter as “-” and threshold 0.5)
-java –jar ./A-Priori.jar ./in.csv ./out.txt - 0.5
+(Besides input/output files, this line specifies delimiter as “-” and threshold 0.5)<br />
+java –jar ./A-Priori.jar ./in.csv ./out.txt - 0.5<br />
 
 #2.Input and Output
 I strictly follow the input file format described in following.
-*The first line must be header, indicating the name of the each possible item, separated by delimiter.
-*Each line that follows the header must begin with the transaction ID followed by item numbers, which all are separated by delimiter.
-*Items must be numbered from 0 to the max value consecutively.
+*	The first line must be header, indicating the name of the each possible item, separated by delimiter.
+*	Each line that follows the header must begin with the transaction ID followed by item numbers, which all are separated by delimiter.
+*	Items must be numbered from 0 to the max value consecutively.
 
-Example:
-item1,item2,item3,item4
-T001,0,3
-T002,1,2
-T003,0,1,2,3
-T004,1,2
+Example:<br />
+item1,item2,item3,item4<br />
+T001,0,3<br />
+T002,1,2<br />
+T003,0,1,2,3<br />
+T004,1,2<br />
 
 Regarding to output file, each line contains a list of frequent group separated by delimiter comma (“,”), followed by the percentage of occurrence in the input file.
 
-For example, if we set threshold as 0.2, then output is possibly be:
-0,1,54%
-4,5,50%
-1,4,29%
-0,4,42%
-1,5,57%
-0,5,74%
-0,4,5,41%
-1,4,5,27%
-0,1,4,23%
-0,1,5,53%
-0,1,4,5,23%
+For example, if we set threshold as 0.2, then output is possibly be:<br />
+0,1,54%<br />
+4,5,50%<br />
+1,4,29%<br />
+0,4,42%<br />
+1,5,57%<br />
+0,5,74%<br />
+0,4,5,41%<br />
+1,4,5,27%<br />
+0,1,4,23%<br />
+0,1,5,53%<br />
+0,1,4,5,23%<br />
 
 #3.Algorithm
 I applied A-Priori algorithm to solve this problem, which is possible to handle large-scale case. The reference could be found on Wiki: http://en.wikipedia.org/wiki/Apriori_algorithm
