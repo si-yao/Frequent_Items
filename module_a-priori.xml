@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_a-priori" default="compile.module.a-priori">
+  <dirname property="module.a-priori.basedir" file="${ant.file.module_a-priori}"/>
+  
+  <property name="module.jdk.home.a-priori" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.a-priori" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.a-priori" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.a-priori" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="a-priori.output.dir" value="${module.a-priori.basedir}/out/production/A-Priori"/>
+  <property name="a-priori.testoutput.dir" value="${module.a-priori.basedir}/out/test/A-Priori"/>
+  
+  <path id="a-priori.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="a-priori.module.production.classpath">
+    <path refid="${module.jdk.classpath.a-priori}"/>
+  </path>
+  
+  <path id="a-priori.runtime.production.module.classpath">
+    <pathelement location="${a-priori.output.dir}"/>
+  </path>
+  
+  <path id="a-priori.module.classpath">
+    <path refid="${module.jdk.classpath.a-priori}"/>
+    <pathelement location="${a-priori.output.dir}"/>
+  </path>
+  
+  <path id="a-priori.runtime.module.classpath">
+    <pathelement location="${a-priori.testoutput.dir}"/>
+    <pathelement location="${a-priori.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.a-priori">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.a-priori">
+    <patternset refid="excluded.from.module.a-priori"/>
+  </patternset>
+  
+  <path id="a-priori.module.sourcepath">
+    <dirset dir="${module.a-priori.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.a-priori" depends="compile.module.a-priori.production,compile.module.a-priori.tests" description="Compile module A-Priori"/>
+  
+  <target name="compile.module.a-priori.production" depends="register.custom.compilers" description="Compile module A-Priori; production classes">
+    <mkdir dir="${a-priori.output.dir}"/>
+    <javac2 destdir="${a-priori.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.a-priori}/javac">
+      <compilerarg line="${compiler.args.a-priori}"/>
+      <bootclasspath refid="a-priori.module.bootclasspath"/>
+      <classpath refid="a-priori.module.production.classpath"/>
+      <src refid="a-priori.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.a-priori"/>
+    </javac2>
+    
+    <copy todir="${a-priori.output.dir}">
+      <fileset dir="${module.a-priori.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.a-priori.tests" depends="register.custom.compilers,compile.module.a-priori.production" description="compile module A-Priori; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.a-priori" description="cleanup module">
+    <delete dir="${a-priori.output.dir}"/>
+    <delete dir="${a-priori.testoutput.dir}"/>
+  </target>
+</project>
