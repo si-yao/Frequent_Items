@@ -1,6 +1,6 @@
 Frequent_Items
 ==============
-A Machine Learning Application for online business.
+A Machine Learning App for online business.
 ==============
 #0.Overview 
 This project is able to find frequent item groups among large scale of transaction data.
