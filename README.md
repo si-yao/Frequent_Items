@@ -1,6 +1,7 @@
 Frequent_Items
+A Machine Learning Application for online business.
 ==============
-#0.Overview
+#0.Overview 
 This project is able to find frequent item groups among large scale of transaction data.
 It is well designed to use less memory to allow more larger input scale.
 It is able to retrieve the frequent group in all size, not only frequent pairs.
